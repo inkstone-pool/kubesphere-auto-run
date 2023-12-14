@@ -1,7 +1,7 @@
 {
   "name": "kubesphere-auto-run",
   "auther": "marco.feng",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "keywords": [
     "kubesphere",
     "puppeteer"
