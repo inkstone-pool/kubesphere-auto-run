@@ -1,12 +1,7 @@
 import axios from 'axios'
 import { getMD5ByBuffer } from './util'
 import { PuppeteerResult } from './type'
-import {
-  failSpinner,
-  infoSpinner,
-  startSpinner,
-  succeedSpinner,
-} from './spinner'
+import { failSpinner, startSpinner, succeedSpinner } from './spinner'
 // 发送图片到企业微信 Webhook
 export function sendImageToWeComWebhook(
   webhookURL: string,
@@ -32,8 +27,11 @@ export function sendImageToWeComWebhook(
         spinner,
         `Screenshot sending successfully:${JSON.stringify(response.data)}`
       )
-    } catch (error: any) {
-      failSpinner(spinner, `Screenshot sending failed:${error.message}`)
+    } catch (error) {
+      failSpinner(
+        spinner,
+        `Screenshot sending failed:${(error as Error).message}`
+      )
     }
   }
 }
@@ -63,8 +61,8 @@ export function sendMessageToWeComWebhook(
         spinner,
         `Message sending successfully:${JSON.stringify(response.data, null, 2)}`
       )
-    } catch (error: any) {
-      failSpinner(spinner, `Message sending failed:${error.message}`)
+    } catch (error) {
+      failSpinner(spinner, `Message sending failed:${(error as Error).message}`)
     }
   }
 }
