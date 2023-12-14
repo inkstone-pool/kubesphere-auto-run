@@ -1,0 +1,71 @@
+{
+  "name": "kubesphere-auto-run",
+  "auther": "marco.feng",
+  "version": "0.2.19",
+  "keywords": [
+    "kubesphere",
+    "puppeteer"
+  ],
+  "description": "Automatically login to the kubesphere pipeline details page and notify the enterprise WeChat with a screenshot of the notification",
+  "main": "./dist/index.cjs.js",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs.js",
+      "import": "./dist/index.es.js"
+    },
+    "./WeComWebhook": {
+      "types": "./dist/WeComWebhook.d.ts",
+      "require": "./dist/WeComWebhook.es.js",
+      "import": "./dist/WeComWebhook.es.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/index.d.ts"
+      ],
+      "WeComWebhook": [
+        "./dist/WeComWebhook.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "rm -rf dist && rollup -c"
+  },
+  "files": [
+    "bin",
+    "dist"
+  ],
+  "bin": {
+    "kubesphere-cli": "./bin/kubesphere-cli.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "crypto": "^1.0.1",
+    "inquirer": "^9.2.12",
+    "ora": "^7.0.1",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-json": "^6.0.1",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/node": "^20.8.10",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "axios": "^1.6.1",
+    "eslint": "^8.53.0",
+    "puppeteer": "21.3.7",
+    "rollup": "^4.3.0"
+  },
+  "peerDependencies": {
+    "axios": "^1.6.1",
+    "puppeteer": "21.3.7"
+  }
+}
