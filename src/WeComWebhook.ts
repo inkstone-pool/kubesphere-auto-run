@@ -39,17 +39,17 @@ export function sendImageToWeComWebhook(
 export function sendMessageToWeComWebhook(
   webhookURL: string,
   textContent: {
-    content: string
+    contentFormatter: (result: PuppeteerResult['result']) => string
     mentioned_list: string[]
     mentioned_mobile_list: string[]
   }
 ) {
-  return async (puppeteerResult: Partial<PuppeteerResult>) => {
+  return async (puppeteerResult: PuppeteerResult) => {
     const spinner = startSpinner('start MessageWeComWebhook')
     const payload = {
       msgtype: 'text',
       text: {
-        content: `Run result:${puppeteerResult.result}\n${textContent.content}`,
+        content: textContent.contentFormatter(puppeteerResult.result),
         mentioned_list: textContent.mentioned_list,
         mentioned_mobile_list: textContent.mentioned_mobile_list,
       },

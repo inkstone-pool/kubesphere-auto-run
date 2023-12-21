@@ -41,19 +41,28 @@ export async function puppeteerOperation(
       idleTime: config.networkIdleTime || 6000,
       timeout: config.networkTimeout || 60000,
     })
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     failSpinner(spinner, err.message)
     throw new Error(
       "The input network idle time of the pusheter's waitForNetworkIdle method is low"
     )
   }
-  const firstRow = await page.waitForXPath(
-    '//*[@id="root"]/div/div[2]/div[2]/div[3]/div/div/div[2]/table/tbody/tr[1]/td[1]'
+
+  const firstRowRunStatus = await page.waitForXPath(
+    '//*[@id="root"]/div/div[2]/div[2]/div[3]/div/div/div[2]/table/tbody/tr/td[1]'
+  )
+  const firstRowRunId = await page.waitForXPath(
+    '//*[@id="root"]/div/div[2]/div[2]/div[3]/div/div/div[2]/table/tbody/tr/td[2]'
   )
   infoSpinner(spinner, 'Start taking a screenshot')
   const bufferData = await page.screenshot({ fullPage: true })
-  const elementHandle = await firstRow!.getProperty('textContent')
-  const elementContent = await elementHandle.jsonValue()
+  const runStatuselEmentHandle = await firstRowRunStatus!.getProperty(
+    'textContent'
+  )
+  const runStatuselEmentContent = await runStatuselEmentHandle.jsonValue()
+  const runIdElementHandle = await firstRowRunId!.getProperty('textContent')
+  const runIdElementContent = await runIdElementHandle.jsonValue()
   succeedSpinner(
     spinner,
     'Successfully run the workflow and get the information'
@@ -61,6 +70,9 @@ export async function puppeteerOperation(
   await browser.close()
   return {
     pageBuffer: bufferData,
-    result: elementContent as string,
+    result: {
+      runStatus: runStatuselEmentContent!,
+      runId: runIdElementContent!,
+    },
   }
 }

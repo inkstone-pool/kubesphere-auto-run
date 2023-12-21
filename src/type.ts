@@ -1,6 +1,9 @@
 export interface PuppeteerResult {
   pageBuffer: Buffer
-  result: string
+  result: {
+    runStatus: string
+    runId: string
+  }
 }
 export type PostHandle = (
   puppeteerResult: Partial<PuppeteerResult>
