@@ -10,7 +10,8 @@ export default {
   output: [
     {
       dir: 'dist',
-      entryFileNames: `[name].[format].js`,
+      entryFileNames: `[name].cjs`,
+      chunkFileNames: '[name]-[hash].cjs', // chunk 文件的命名规则
       format: 'cjs',
     },
     {
